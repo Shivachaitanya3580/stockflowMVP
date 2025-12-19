@@ -29,7 +29,7 @@ app.use("/api/settings", settingsRoutes);
    HEALTH CHECK
 ====================== */
 app.get("/", (req, res) => {
-  res.json({ status: "API is running 🚀" });
+  res.json({ status: "API is running" });
 });
 
 /* ======================
@@ -49,13 +49,13 @@ const MONGO_URI = process.env.MONGO_URI;
 mongoose
   .connect(MONGO_URI)
   .then(() => {
-    console.log("✅ MongoDB connected");
+    console.log(" MongoDB connected");
 
     app.listen(PORT, () => {
-      console.log(`🚀 Server running on port ${PORT}`);
+      console.log(`Server running on port ${PORT}`);
     });
   })
   .catch((error) => {
-    console.error("❌ MongoDB connection failed:", error);
+    console.error(" MongoDB connection failed:", error);
     process.exit(1);
   });

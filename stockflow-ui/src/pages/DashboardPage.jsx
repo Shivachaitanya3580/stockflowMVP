@@ -30,7 +30,7 @@ const DashboardPage = () => {
     loadDashboard();
   }, []);
 
-  // 📊 Calculations
+  //  Calculations
   const totalProducts = products.length;
 
   const totalStock = products.reduce(
@@ -73,7 +73,7 @@ const DashboardPage = () => {
         <div className="text-gray-600">Loading dashboard...</div>
       ) : (
         <>
-          {/* 📦 Summary Cards */}
+          {/*  Summary Cards */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
             <div className="bg-white rounded-lg shadow p-6 border">
               <p className="text-sm text-gray-500">Total Products</p>

@@ -1,4 +1,4 @@
-const API_BASE_URL = "http://localhost:5000/api/settings";
+const API_BASE_URL = "https://stockflowmvp-backend.onrender.com/api/settings";
 
 /**
  * Get auth headers
