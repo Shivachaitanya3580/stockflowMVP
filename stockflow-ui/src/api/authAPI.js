@@ -1,10 +1,18 @@
+// src/api/authAPI.js
+
 const API_BASE_URL = "https://stockflowmvp-backend.onrender.com";
 
-
 /**
- * Handle API response
+ * Handle API response safely
  */
 const handleResponse = async (response) => {
+  const contentType = response.headers.get("content-type");
+
+  // Prevent HTML error pages (<!DOCTYPE>) from crashing the app
+  if (!contentType || !contentType.includes("application/json")) {
+    throw new Error("Server returned non-JSON response");
+  }
+
   const data = await response.json();
 
   if (!response.ok) {
@@ -23,16 +31,16 @@ export const authAPI = {
    * Creates user + organization
    */
   signup: async ({ email, password, orgName }) => {
-    const response = await fetch(`${API_BASE_URL}/signup`, {
+    const response = await fetch(`${API_BASE_URL}/api/auth/signup`, {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         email,
         password,
-        orgName
-      })
+        orgName,
+      }),
     });
 
     return handleResponse(response);
@@ -43,15 +51,15 @@ export const authAPI = {
    * Returns JWT token
    */
   login: async ({ email, password }) => {
-    const response = await fetch(`${API_BASE_URL}/login`, {
+    const response = await fetch(`${API_BASE_URL}/api/auth/login`, {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         email,
-        password
-      })
+        password,
+      }),
     });
 
     const data = await handleResponse(response);
@@ -83,5 +91,5 @@ export const authAPI = {
    */
   isAuthenticated: () => {
     return !!localStorage.getItem("token");
-  }
+  },
 };
